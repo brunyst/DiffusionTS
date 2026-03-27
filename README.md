@@ -33,22 +33,6 @@ The repository is organized around a full experimental workflow:
 
 ## Supported Data Families
 
-The project includes simulation and evaluation utilities for several synthetic time series families, including:
-
-- `OUrange`
-- `OU`
-- `OUmodes`
-- `BM`
-- `GBM`
-- `CIR`
-- `CIRrange`
-- `Heston`
-- `HestonRange`
-- `Lines`
-- `Sines`
-- `LinearODEs`
-- `PDV2factor`
-
 The available dataset labels, schedules, and model configurations are declared in [`pipelines/dicts.py`](pipelines/dicts.py).
 
 ## Installation
