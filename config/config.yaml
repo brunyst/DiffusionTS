@@ -1,0 +1,95 @@
+project:
+  seed: 42
+  mode: all
+
+wandb:
+  project: diffusion-ts
+  entity: null        # username W&B, ou null pour le défaut
+  mode: online        # online | offline | disabled
+  name: null
+  tags: []            # ex: [baseline, grid-search]
+
+data:
+  M_train: 100
+  L: 256
+  dt: 0.015625
+  x0: 1.0
+  d: 2
+
+  # OUrange params
+  theta_range: [[0.1, 3.5]]
+  mu_range: [[0.0, 0.0]]
+  sigma_range: [[0.02, 0.3]]
+
+  # HestonRange params
+  kappa_range: [[0.5, 4.0]]
+  heston_theta_range: [[0.5, 1.5]]
+  xi_range: [[0.01, 0.7]]
+  rho_range: [[-0.9, 0.9]]
+  r_range: [[0.02, 0.1]]
+
+  data_label: HestonRange
+  transforms: ["R", null]
+  plot_series: true
+  plot_params: true
+  n_plots: 5
+  force: true
+
+schedule:
+  T: 1.0
+  eps: 0.001
+  schedule_label: VP
+  betamin: 0.0001
+  betamax: 20.0
+
+training:
+  model_label: "ScoreNet1D Adapt"
+  run_id: null              # set by jzsub.py (via WANDB_RUN_ID) or auto-generated at runtime
+  force_train: true
+  track_fmem: false      # save periodic checkpoints for f_mem tracking
+  fmem_n: 10             # checkpoint interval (every N epochs)
+  batch_size: 512
+  lr: 0.0001
+  n_epochs: 3000
+  patience: null
+  drop_last: false
+
+  loss_type: score
+
+  base_channel_width: 8   # first channel; each subsequent level doubles (×2)
+  nb_channels: 4          # niveaux de résolution → channels = [W, 2W, 4W, ..., W×2^(nb-1)]
+  embed_dim: null         # null = auto: 4 × last_channel (e.g. base=8,nb=3 → 128)
+  kernel_size: 21
+  nb_groups: 8            # GroupNorm groups — base_channel_width must be divisible by nb_groups
+  nb_heads: null
+  dim_head: null
+  in_channels: 2
+  out_channels: 2
+
+  scheduler:
+    enabled: true          # true = active ReduceLROnPlateau, false = LR fixe
+    mode: min
+    factor: 0.8
+    patience: 50
+    threshold: 0.001
+    threshold_mode: rel
+    cooldown: 20
+    min_lr: 0.00001
+
+sampling:
+  method: sde_euler
+  M_gen: 1000
+  nb_steps: 1000
+  eps_sample: 0.001
+  force_gen: true
+  n_plots: 5
+
+metrics:
+  force_MLE: true
+  suptitle: null
+  compute_predictive: true
+  compute_discriminative: true
+  pred_iterations: 1000
+  disc_iterations: 1000
+  fmem_m: 100            # samples generated per checkpoint for f_mem (0 = disabled)
+  fmem_nb_steps: 800    # diffusion steps for f_mem generation (vs nb_steps=1000 for normal sampling)

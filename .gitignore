@@ -1,0 +1,50 @@
+# Environnements Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+.ipynb_checkpoints/
+
+# Données générées / expériences (souvent lourdes)
+data_gen/
+data_sim/
+experiments/
+figures/
+outputs/
+
+# Artefacts de runs (poids, figures, données générées, logs)
+runs/
+
+# Mapping job_id → run_id (local à chaque machine)
+.jzsub_job_map.json
+
+# Poids des modèles
+*.pth
+*.pt
+*.ckpt
+
+# Logs W&B et Hydra
+wandb/
+multirun/
+.hydra/
+logs/
+
+# Jupyter (on garde les .ipynb, on ignore seulement les checkpoints)
+.ipynb_checkpoints/
+
+# Figures générées dans notebooks
+notebooks/**/*.png
+notebooks/**/*.jpg
+notebooks/**/*.svg
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# JeanZay local config (chemins absolus, propres à chaque machine)
+jeanzay/.config.json
