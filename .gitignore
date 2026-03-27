@@ -48,3 +48,6 @@ Thumbs.db
 
 # JeanZay local config (chemins absolus, propres à chaque machine)
 jeanzay/.config.json
+
+.jzsub_last_optuna.json
+.jzsub_last_sweep.json
