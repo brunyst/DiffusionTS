@@ -1,6 +1,6 @@
 # Diffusion Models for Synthetic Time Series Generation: A Study on Stochastic Processes
 
-This repository contains our project for the **Advanced Deep Learning** course in the **MVA Master's program**. It studies the use of diffusion models for synthetic time series generation, with a focus on stochastic-process-based data such as Ornstein-Uhlenbeck and Heston-type dynamics.
+This repository contains our project for the **Advanced Deep Learning** course in the **MVA Master's program**. It studies the use of diffusion models for synthetic time series generation, with a focus on stochastic-process-based data such as Ornstein-Uhlenbeck dynamics.
 
 The codebase provides an end-to-end pipeline for:
 
